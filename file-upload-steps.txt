@@ -1,0 +1,10 @@
+1. third party library = multr 
+Install multr 
+
+2. Changes in view.
+
+3. Middleware to handle files.
+
+4. Apply that Middleware.
+
+5. Update Controller to update urls of images.
