@@ -32,12 +32,15 @@ const usercontroller = new UserController()
 
 
 server.get('/register', usercontroller.getRegister)
+server.get('/login', usercontroller.getLogin)
 server.get("/", productcontroller.getProducts.bind(productcontroller))
 server.get("/new", productcontroller.getAddForm)
 // URL parameters => id
 server.get("/update-product/:id", productcontroller.getUpdateProductView)
 
 
+server.post('/register', usercontroller.postRegister)
+server.post('/login', usercontroller.postLogin)
 server.post("/delete-product/:id", productcontroller.deleteProduct)
 
 server.post(
