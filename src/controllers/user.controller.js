@@ -31,8 +31,20 @@ export default class UserController {
 
         // the session will be attached to our session body.
         req.session.userEmail = email;
-        
+
         var products = ProductModel.get()
-        res.render("index", {products})
+        res.render("index", {products, userEmail : req.session.userEmail})
+    }
+
+    // handler for the path
+    logout(req, res) {
+        // on logout, destroy the session
+        req.session.destroy((err) => {
+            if(err) {
+                console.log(err);
+            } else {
+                res.redirect('/login')
+            }
+        })
     }
 }

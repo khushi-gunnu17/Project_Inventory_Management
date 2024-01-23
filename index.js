@@ -56,6 +56,7 @@ server.get("/update-product/:id", auth, productcontroller.getUpdateProductView)
 
 server.post('/register', usercontroller.postRegister)
 server.post('/login', usercontroller.postLogin)
+server.get('/logout', usercontroller.logout)
 
 server.post("/delete-product/:id", auth, productcontroller.deleteProduct)
 
@@ -68,7 +69,6 @@ server.post(
 
 // this one down below to get the updated data
 server.post("/update-product", auth, productcontroller.postUpdateProduct)
-
 
 
 server.listen(3400, () => {
