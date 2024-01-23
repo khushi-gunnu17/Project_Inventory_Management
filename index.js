@@ -6,10 +6,23 @@ import ejsLayouts from 'express-ejs-layouts'
 import { validateRequest } from './src/middlewares/validation.middleware.js'
 import { uploadFile } from './src/middlewares/file-upload.middleware.js'
 import UserController from './src/controllers/user.controller.js'
+import session from 'express-session'
+import { auth } from './src/middlewares/auth.middleware.js'
 
 const server = express()
 
 server.use(express.static('public'));
+
+// session
+server.use(
+    session ({
+    secret : 'SecretKey',
+    resave : false,
+    saveUninitialized : true,
+    cookie: { secure: false }
+    // secure : true (for https)
+})
+);
 
 // parse form data
 server.use(express.urlencoded({extended: true}))
@@ -33,25 +46,28 @@ const usercontroller = new UserController()
 
 server.get('/register', usercontroller.getRegister)
 server.get('/login', usercontroller.getLogin)
-server.get("/", productcontroller.getProducts.bind(productcontroller))
-server.get("/new", productcontroller.getAddForm)
+
+
+server.get("/", auth, productcontroller.getProducts.bind(productcontroller))
+server.get("/new", auth, productcontroller.getAddForm)
 // URL parameters => id
-server.get("/update-product/:id", productcontroller.getUpdateProductView)
+server.get("/update-product/:id", auth, productcontroller.getUpdateProductView)
 
 
 server.post('/register', usercontroller.postRegister)
 server.post('/login', usercontroller.postLogin)
-server.post("/delete-product/:id", productcontroller.deleteProduct)
+
+server.post("/delete-product/:id", auth, productcontroller.deleteProduct)
 
 server.post(
-    "/", 
+    "/", auth,
     uploadFile.single('imageUrl'), 
     validateRequest, 
     productcontroller.addNewProduct
 )
 
 // this one down below to get the updated data
-server.post("/update-product", productcontroller.postUpdateProduct)
+server.post("/update-product", auth, productcontroller.postUpdateProduct)
 
 
 

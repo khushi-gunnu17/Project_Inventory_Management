@@ -28,6 +28,10 @@ export default class UserController {
                 errorMessage : 'Invalid Credentials.'
             })
         }
+
+        // the session will be attached to our session body.
+        req.session.userEmail = email;
+        
         var products = ProductModel.get()
         res.render("index", {products})
     }
