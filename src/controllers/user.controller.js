@@ -47,4 +47,11 @@ export default class UserController {
             }
         })
     }
+
+
+    // same as above 
+    // logout = (req, res) => {
+    //     req.session = null;
+    //     res.redirect("/login")
+    // }
 }
