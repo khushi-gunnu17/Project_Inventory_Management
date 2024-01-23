@@ -5,6 +5,7 @@ import productsController from './src/controllers/product.controller.js'
 import ejsLayouts from 'express-ejs-layouts'
 import { validateRequest } from './src/middlewares/validation.middleware.js'
 import { uploadFile } from './src/middlewares/file-upload.middleware.js'
+import UserController from './src/controllers/user.controller.js'
 
 const server = express()
 
@@ -26,12 +27,17 @@ server.use(ejsLayouts)
 // create an instance of productController
 const productcontroller = new productsController() 
 
+// create an instance of UserController
+const usercontroller = new UserController()
 
 
+server.get('/register', usercontroller.getRegister)
 server.get("/", productcontroller.getProducts.bind(productcontroller))
 server.get("/new", productcontroller.getAddForm)
 // URL parameters => id
 server.get("/update-product/:id", productcontroller.getUpdateProductView)
+
+
 server.post("/delete-product/:id", productcontroller.deleteProduct)
 
 server.post(

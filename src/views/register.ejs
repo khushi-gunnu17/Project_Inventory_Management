@@ -1,0 +1,18 @@
+<h1 class="mt-5 mb-4 header">Register</h1>
+
+<form action="/register" method="post">
+    <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" id="name" name="name" required>
+    </div>
+    <div class="mb-3">
+        <label for="desc" class="form-label">Email Address</label>
+        <textarea class="form-control" id="desc" name="desc" rows="1" required></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="price" class="form-label">Password</label>
+        <input type="number" class="form-control" id="price" name="price" step="0.01" min="0">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
