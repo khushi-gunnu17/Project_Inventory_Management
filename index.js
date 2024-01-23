@@ -17,7 +17,7 @@ server.use(express.static('public'));
 
 // cookie
 server.use(cookieParser());
-server.use(setLastVisit);
+// server.use(setLastVisit);
 
 // session
 server.use(
@@ -54,7 +54,7 @@ server.get('/register', usercontroller.getRegister)
 server.get('/login', usercontroller.getLogin)
 
 
-server.get("/", auth, productcontroller.getProducts.bind(productcontroller))
+server.get("/", setLastVisit, auth, productcontroller.getProducts.bind(productcontroller))
 server.get("/new", auth, productcontroller.getAddForm)
 // URL parameters => id
 server.get("/update-product/:id", auth, productcontroller.getUpdateProductView)
