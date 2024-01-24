@@ -35,7 +35,7 @@ server.use(express.urlencoded({extended: true}))
 
 // setup view engine settings
 server.set("view engine", "ejs")
-// pat of our views folder, have to give the relative root folder 
+// part of our views folder, have to give the relative root folder 
 server.set("views", path.join(path.resolve(), "src", "views"))     
 
 
